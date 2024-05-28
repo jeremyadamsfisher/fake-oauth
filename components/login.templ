@@ -1,0 +1,41 @@
+package components
+
+
+templ Login(email string, isValidEmail, initialPageLoad bool) {
+    if (!isValidEmail || initialPageLoad) {
+        <form class="row g-3" hx-post="/components/login" hx-swap="outerHTML transition:true">
+            <div class="form-group col-12">
+                <label for="email">Email address</label>
+                <input
+                    type="email"
+                    class={ "form-control", templ.KV("is-invalid", !isValidEmail && !initialPageLoad) }
+                    id="email"
+                    name="email"
+                    value={ email }
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email" >
+                if (!isValidEmail && !initialPageLoad) {
+                    <div class="invalid-feedback">Mal-formatted email.</div>
+                }
+                <small id="emailHelp" class="form-text text-muted">
+                    Not checked against an authentication system. Fake Auth Proxy is only useful for debugging purposes.
+                </small>
+            </div>
+            <div class="col-12">
+                @Button("Log In", "submit")
+            </div>
+        </form>
+    } else {
+        <p>Successfully logged on!</p>
+        <p>
+            Refresh your browser or
+            <span class="px-1">
+                @LinkButton("Click here", "/")
+            </span>
+            to proceed to your destination.
+        </p>
+        <p>
+            You may also go to <a href="/manage">/manage</a> to manage your user session at any time.
+        </p>
+    }
+}

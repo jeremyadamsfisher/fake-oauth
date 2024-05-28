@@ -1,0 +1,37 @@
+package routes
+
+import "github.com/jeremyadamsfisher/fake-user-cookie/components"
+
+templ Home() {
+  @Base("/") {
+    <!--
+    Initially, there is no email to validate, so we simply pass an empty string
+    and indicate that this is the initial page load
+     -->
+    @components.Login("", false, true)
+  }
+}
+
+templ About() {
+  @Base("/about") {
+    <p>Fake Auth Proxy is a simple microservice to fake the user log in system without access
+    to proper OAuth. It is designed to be an insecure, drop-in replacement for <a href="https://github.com/oauth2-proxy/oauth2-proxy">oauth2-proxy</a>
+    </p>
+    <p><b>Author:</b> Jeremy Fisher, 2024</p>
+  }
+}
+
+templ UserSessionManager(email string, valid bool) {
+  @Base("/manage") {
+    if (valid) {
+      @components.UserManagement(email)
+    } else {
+      <span>Please log in.</span>
+    }
+  }
+}
+
+// Route: /login
+templ Login(userProvidedEmail string, isEmailValid bool) {
+  @components.Login(userProvidedEmail, isEmailValid, false)
+}

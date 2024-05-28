@@ -1,0 +1,25 @@
+package components
+
+templ navLink(linkText string, currentUrl, href templ.SafeURL) {
+    <li class="nav-item">
+        <a class={ "nav-link", templ.KV("active", currentUrl == href) } href={ href }>{ linkText }</a>
+    </li>
+}
+
+templ Navbar(currentUrl templ.SafeURL) {
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-unlock"></i> Fake Auth Proxy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            @navLink("Login", currentUrl, "/")
+            @navLink("Manage", currentUrl, "/manage")
+            @navLink("About", currentUrl, "/about")
+        </ul>
+        </div>
+    </div>
+    </nav>
+}

@@ -1,0 +1,9 @@
+package components
+
+templ Button(buttonText, buttonType string) {
+  <button type={ buttonType } class="btn btn-primary">{ buttonText }</button>
+}
+
+templ LinkButton(buttonText string, href templ.SafeURL) {
+  <a href={ href } class="btn btn-primary">{ buttonText }</a>
+}

@@ -1,0 +1,20 @@
+package components
+
+templ UserManagement(email string) {
+    <table class="table table-striped-rows">
+        <thead>
+            <tr>
+                <th scope="col">User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{ email }
+                    <span class="px-2">
+                        @LinkButton("Log out", "/oauth/sign_out")
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
